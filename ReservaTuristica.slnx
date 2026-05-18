@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ReservaTuristica.Application/ReservaTuristica.Application.csproj" />
+  <Project Path="ReservaTuristica.Domain/ReservaTuristica.Domain.csproj" />
+  <Project Path="ReservaTuristica.Infrastructure/ReservaTuristica.Infrastructure.csproj" />
+  <Project Path="ReservaTuristica/ReservaTuristica.Web.csproj" />
+</Solution>
