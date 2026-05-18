@@ -17,7 +17,6 @@ namespace ReservaTuristica.Domain.Entities
 
         public TipoSede Tipo { get; set; }
 
-        public ICollection<Alojamiento> Alojamientos { get; set; }
-            = new List<Alojamiento>();
+        public ICollection<Alojamiento> Alojamientos { get; set; } = new List<Alojamiento>();
     }
 }

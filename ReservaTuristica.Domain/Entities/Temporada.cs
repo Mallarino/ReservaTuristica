@@ -5,25 +5,20 @@ using System.Text;
 
 namespace ReservaTuristica.Domain.Entities
 {
-    public class Alojamiento
+    public class Temporada
     {
         public int Id { get; set; }
 
         public string Nombre { get; set; } = string.Empty;
 
-        public string Descripcion { get; set; } = string.Empty;
+        public TipoTemporada Tipo { get; set; }
 
-        public int Capacidad { get; set; }
+        public DateTime FechaInicio { get; set; }
 
-        public int CantidadHabitaciones { get; set; }
-
-        public TipoAlojamiento Tipo { get; set; }
-
-        public int SedeId { get; set; }
-
-        public Sede Sede { get; set; } = null!;
+        public DateTime FechaFin { get; set; }
 
         public ICollection<Tarifa> Tarifas { get; set; } = new List<Tarifa>();
 
     }
+
 }
