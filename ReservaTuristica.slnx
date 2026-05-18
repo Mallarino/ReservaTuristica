@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Elementos de la solución/">
+    <File Path=".gitignore" />
+  </Folder>
   <Project Path="ReservaTuristica.Application/ReservaTuristica.Application.csproj" />
   <Project Path="ReservaTuristica.Domain/ReservaTuristica.Domain.csproj" />
   <Project Path="ReservaTuristica.Infrastructure/ReservaTuristica.Infrastructure.csproj" />
