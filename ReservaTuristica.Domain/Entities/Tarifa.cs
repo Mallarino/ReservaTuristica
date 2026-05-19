@@ -13,6 +13,10 @@ namespace ReservaTuristica.Domain.Entities
 
         public decimal Monto { get; set; }
 
+        public int CapacidadBase { get; set; }
+
+        public decimal ValorPersonaAdicional { get; set; }
+
         public int TemporadaId { get; set; }
 
         public Temporada Temporada { get; set; } = null!;

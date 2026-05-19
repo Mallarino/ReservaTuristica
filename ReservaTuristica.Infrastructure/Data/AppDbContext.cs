@@ -25,6 +25,10 @@ public class AppDbContext : IdentityDbContext
             .Property(t => t.Monto)
             .HasPrecision(18, 2);
 
+        modelBuilder.Entity<Tarifa>()
+           .Property(t => t.ValorPersonaAdicional)
+           .HasPrecision(18, 2);
+
         modelBuilder.Entity<Reserva>()
             .Property(r => r.Total)
             .HasPrecision(18, 2);
@@ -39,6 +43,5 @@ public class AppDbContext : IdentityDbContext
     public DbSet<Tarifa> Tarifas { get; set; }
 
     public DbSet<Temporada> Temporadas { get; set; }
-
 
 }

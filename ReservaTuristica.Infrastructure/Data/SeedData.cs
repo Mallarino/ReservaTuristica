@@ -55,7 +55,25 @@ public static class SeedData
 
 		var sedes = new List<Sede>
 		{
-			new Sede
+			//APTOS
+            new Sede
+            {
+                Nombre = "Medellin",
+                Ciudad = "Medellin",
+                CapacidadTotal = 9,
+                Tipo = TipoSede.Apartamento
+            },
+            new Sede
+            {
+                Nombre = "Santa Marta",
+                Ciudad = "Santa Marta",
+                CapacidadTotal = 20,
+                Tipo = TipoSede.Apartamento
+            },
+
+			//SEDES RECREATIVAS
+
+            new Sede
 			{
 				Nombre = "El placer",
 				Ciudad = "Fusagasugá",
@@ -111,15 +129,99 @@ public static class SeedData
 			return; // DB has been seeded
 		}
 
-		var elPlacer = context.Sedes.First(s => s.Nombre == "El placer");
+		//APTOS
+        var medellin = context.Sedes.First(s => s.Nombre == "Medellin");
+        var santaMarta = context.Sedes.First(s => s.Nombre == "Santa Marta");
+
+        //SEDES RECREATIVAS
+        var elPlacer = context.Sedes.First(s => s.Nombre == "El placer");
 		var villeta = context.Sedes.First(s => s.Nombre == "Villeta");
 		var gonzaloMorante = context.Sedes.First(s => s.Nombre == "Gonzalo Morante");
 		var tablones = context.Sedes.First(s => s.Nombre == "Tablones");
 		var manguruma = context.Sedes.First(s => s.Nombre == "Manguruma");
 		var federman = context.Sedes.First(s => s.Nombre == "Federman");
 
+
 		var alojamientos = new List<Alojamiento>
 		{
+			// APTOS
+			// MEDELLIN
+			new Alojamiento
+            {
+                Nombre = "Habitacion 1",
+                Descripcion = "2 camas sencillas y baño privado",
+                Capacidad = 2,
+                CantidadHabitaciones = 1,
+                Tipo = TipoAlojamiento.Apartamento,
+                SedeId = medellin.Id
+            },
+            new Alojamiento
+            {
+                Nombre = "Habitacion 2",
+                Descripcion = "2 camas sencillas",
+                Capacidad = 2,
+                CantidadHabitaciones = 1,
+                Tipo = TipoAlojamiento.Apartamento,
+                SedeId = medellin.Id
+            },
+            new Alojamiento
+            {
+                Nombre = "Habitacion 3",
+                Descripcion = "2 camas sencillas",
+                Capacidad = 2,
+                CantidadHabitaciones = 1,
+                Tipo = TipoAlojamiento.Apartamento,
+                SedeId = medellin.Id
+            },
+            new Alojamiento
+            {
+                Nombre = "Habitacion 4",
+                Descripcion = "2 camas sencillas",
+                Capacidad = 2,
+                CantidadHabitaciones = 1,
+                Tipo = TipoAlojamiento.Apartamento,
+                SedeId = medellin.Id
+            },
+            new Alojamiento
+            {
+                Nombre = "Habitacion 5",
+                Descripcion = "1 cama sencilla y baño privado",
+                Capacidad = 1,
+                CantidadHabitaciones = 1,
+                Tipo = TipoAlojamiento.Apartamento,
+                SedeId = medellin.Id
+            },
+
+			//SANTA MARTA
+			new Alojamiento
+            {
+                Nombre = "Apartamento 202",
+                Descripcion = "sala comedor, cocina, 2 baños, tres habitaciones y un sitio para parqueo",
+                Capacidad = 8,
+                CantidadHabitaciones = 3,
+                Tipo = TipoAlojamiento.Apartamento,
+                SedeId = santaMarta.Id
+            },
+            new Alojamiento
+            {
+                Nombre = "Apartamento 301",
+                Descripcion = "Sala comedor, cocina, 1 baño, dos habitaciones y un sitio para parqueo",
+                Capacidad = 6,
+                CantidadHabitaciones = 2,
+                Tipo = TipoAlojamiento.Apartamento,
+                SedeId = santaMarta.Id
+            },
+            new Alojamiento
+            {
+                Nombre = "Apartamento 401",
+                Descripcion = "Sala comedor, cocina, 1 baño, dos habitaciones y un sitio para parqueo",
+                Capacidad = 6,
+                CantidadHabitaciones = 2,
+                Tipo = TipoAlojamiento.Apartamento,
+                SedeId = santaMarta.Id
+            },
+
+			//SEDES RECREATIVAS
 			// VILLETA
 			new Alojamiento
 			{
