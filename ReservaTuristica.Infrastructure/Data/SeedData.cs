@@ -572,4 +572,296 @@ public static class SeedData
 		context.Alojamientos.AddRange(alojamientos);
 		await context.SaveChangesAsync();
 	}
+
+	public static async Task SeedTarifas(AppDbContext context)
+	{
+        if (context.Tarifas.Any())
+        {
+            return;
+        }
+
+		//TEMPORADA
+        var baja = context.Temporadas
+			.First(t => t.Nombre == "Baja");
+
+        var alta = context.Temporadas
+            .First(t => t.Nombre == "Alta");
+
+        //SEDES
+        var medellin = context.Sedes
+			.First(s => s.Nombre == "Medellin");
+
+        var santaMarta = context.Sedes
+			.First(s => s.Nombre == "Santa Marta");
+
+		//ALOJAMIENTOS
+
+		//MEDELLIN
+		var habitacionMedellin = context.Alojamientos
+			.First(a =>
+				a.Nombre == "Habitacion 1" &&
+				a.SedeId == medellin.Id);
+
+        var habitacion2 = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Habitacion 2" &&
+                a.SedeId == medellin.Id);
+
+        var habitacion3 = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Habitacion 3" &&
+                a.SedeId == medellin.Id);
+
+        var habitacion4 = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Habitacion 4" &&
+                a.SedeId == medellin.Id);
+
+        var habitacion5 = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Habitacion 5" &&
+                a.SedeId == medellin.Id);
+
+        //SANTA MARTA
+        var apartamento202 = context.Alojamientos
+			.First(a =>
+				a.Nombre == "Apartamento 202" &&
+				a.SedeId == santaMarta.Id);
+
+        var apartamento301 = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Apartamento 301" &&
+                a.SedeId == santaMarta.Id);
+
+        var apartamento401 = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Apartamento 401" &&
+                a.SedeId == santaMarta.Id);
+
+
+        var tarifas = new List<Tarifa>
+		{
+			//MEDELLIN
+			new Tarifa
+			{
+				Nombre = "Habitacion 1 - 1 persona - Medellin",
+
+				Monto = 63000,
+
+				CapacidadBase = 1,
+
+				ValorPersonaAdicional = 0,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = habitacionMedellin.Id
+			},
+            new Tarifa
+            {
+                Nombre = "Habitacion 1 - 2 persona - Medellin",
+
+                Monto = 75000,
+
+                CapacidadBase = 2,
+
+                ValorPersonaAdicional = 0,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = habitacionMedellin.Id
+            },
+            new Tarifa
+            {
+                Nombre = "Habitacion 2 - 1 persona - Medellin",
+
+                Monto = 63000,
+
+                CapacidadBase = 1,
+
+                ValorPersonaAdicional = 0,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = habitacion2.Id
+            },
+            new Tarifa
+            {
+                Nombre = "Habitacion 2 - 2 persona - Medellin",
+
+                Monto = 75000,
+
+                CapacidadBase = 2,
+
+                ValorPersonaAdicional = 0,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = habitacion2.Id
+            },
+            new Tarifa
+            {
+                Nombre = "Habitacion 3 - 1 persona - Medellin",
+
+                Monto = 63000,
+
+                CapacidadBase = 1,
+
+                ValorPersonaAdicional = 0,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = habitacion3.Id
+            },
+            new Tarifa
+            {
+                Nombre = "Habitacion 3 - 2 persona - Medellin",
+
+                Monto = 75000,
+
+                CapacidadBase = 2,
+
+                ValorPersonaAdicional = 0,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = habitacion3.Id
+            },
+            new Tarifa
+            {
+                Nombre = "Habitacion 4 - 1 persona - Medellin",
+
+                Monto = 63000,
+
+                CapacidadBase = 1,
+
+                ValorPersonaAdicional = 0,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = habitacion4.Id
+            },
+            new Tarifa
+            {
+                Nombre = "Habitacion 4 - 2 persona - Medellin",
+
+                Monto = 75000,
+
+                CapacidadBase = 2,
+
+                ValorPersonaAdicional = 0,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = habitacion4.Id
+            },
+            new Tarifa
+            {
+                Nombre = "Habitacion 5 - 1 persona - Medellin",
+
+                Monto = 63000,
+
+                CapacidadBase = 1,
+
+                ValorPersonaAdicional = 0,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = habitacion5.Id
+            },
+
+			//SANTA MARTA - TEMPORADA BAJA
+			new Tarifa
+			{
+				Nombre = "Apartamento 301 - Baja",
+
+				Monto = 89000,
+
+				CapacidadBase = 6,
+
+				ValorPersonaAdicional = 0,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = apartamento301.Id
+			},
+
+			new Tarifa
+			{
+				Nombre = "Apartamento 401 - Baja",
+
+				Monto = 89000,
+
+				CapacidadBase = 6,
+
+				ValorPersonaAdicional = 0,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = apartamento401.Id
+			},
+
+			new Tarifa
+			{
+				Nombre = "Apartamento 202 - Baja",
+
+				Monto = 103000,
+
+				CapacidadBase = 8,
+
+				ValorPersonaAdicional = 0,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = apartamento202.Id
+			},
+
+			//SANTA MARTA - TEMPORADA ALTA
+			 new Tarifa
+			{
+				Nombre = "Apartamento 301 - Alta",
+
+				Monto = 124000,
+
+				CapacidadBase = 6,
+		
+				ValorPersonaAdicional = 0,
+
+				TemporadaId = alta.Id,
+
+				AlojamientoId = apartamento301.Id
+			},
+
+			new Tarifa
+			{
+				Nombre = "Apartamento 401 - Alta",
+
+				Monto = 124000,
+
+				CapacidadBase = 6,
+
+				ValorPersonaAdicional = 0,
+
+				TemporadaId = alta.Id,
+
+				AlojamientoId = apartamento401.Id
+			},
+
+			new Tarifa
+			{
+				Nombre = "Apartamento 202 - Alta",
+
+				Monto = 143000,
+
+				CapacidadBase = 8,
+
+				ValorPersonaAdicional = 0,
+
+				TemporadaId = alta.Id,
+		
+				AlojamientoId = apartamento202.Id
+			}
+
+
+        };
+    }
 }
