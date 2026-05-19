@@ -15,7 +15,8 @@ public static class SeedData
 		await SeedTemporada(context);
 		await SeedSedes(context);
 		await SeedAlojamientos(context);
-	}
+        await SeedTarifas(context);
+    }
 
 	public static async Task SeedTemporada(AppDbContext context)
 	{
@@ -284,7 +285,7 @@ public static class SeedData
 			new Alojamiento
 			{
 				Nombre = "Alojamiento 6",
-				Descripcion = "Sala de estar con sofá cama y Televisor, baño, habitación con cama doble y una cama sencilla, cocineta equipada y neverra, terraza comedor.",
+				Descripcion = "Sala de estar con sofá cama y Televisor, baño, habitación con cama doble y una cama sencilla, cocineta equipada y nevera, terraza comedor.",
 				Capacidad = 4,
 				CantidadHabitaciones = 1,
 				Tipo = TipoAlojamiento.Cabana,
@@ -293,7 +294,7 @@ public static class SeedData
 			new Alojamiento
 			{
 				Nombre = "Alojamiento 7",
-				Descripcion = "Sala de estar con sofá cama y Televisor, baño, habitación con cama doble y una cama sencilla, cocineta equipada y neverra, terraza comedor.",
+				Descripcion = "Sala de estar con sofá cama y Televisor, baño, habitación con cama doble y una cama sencilla, cocineta equipada y nevera, terraza comedor.",
 				Capacidad = 4,
 				CantidadHabitaciones = 1,
 				Tipo = TipoAlojamiento.Cabana,
@@ -302,7 +303,7 @@ public static class SeedData
 			new Alojamiento
 			{
 				Nombre = "Alojamiento 8",
-				Descripcion = "Sala de estar con sofá cama y Televisor, baño, habitación con cama doble y una cama sencilla, cocineta equipada y neverra, terraza comedor.",
+				Descripcion = "Sala de estar con sofá cama y Televisor, baño, habitación con cama doble y una cama sencilla, cocineta equipada y nevera, terraza comedor.",
 				Capacidad = 4,
 				CantidadHabitaciones = 1,
 				Tipo = TipoAlojamiento.Cabana,
@@ -374,7 +375,7 @@ public static class SeedData
 			new Alojamiento
 			{
 				Nombre = "Alojamiento 1",
-				Descripcion = "Una habitación con cama doble y un camarote. Televisor, baño, cocineta con neverra y comedor.",
+				Descripcion = "Una habitación con cama doble y un camarote. Televisor, baño, cocineta con nevera y comedor.",
 				Capacidad = 4,
 				CantidadHabitaciones = 1,
 				Tipo = TipoAlojamiento.Habitacion,
@@ -384,7 +385,7 @@ public static class SeedData
 			new Alojamiento
 			{
 				Nombre = "Alojamiento 2",
-				Descripcion = "Una habitación con cama doble y un camarote. Televisor, baño, cocineta con neverra y comedor.",
+				Descripcion = "Una habitación con cama doble y un camarote. Televisor, baño, cocineta con nevera y comedor.",
 				Capacidad = 4,
 				CantidadHabitaciones = 1,
 				Tipo = TipoAlojamiento.Habitacion,
@@ -594,10 +595,25 @@ public static class SeedData
         var santaMarta = context.Sedes
 			.First(s => s.Nombre == "Santa Marta");
 
-		//ALOJAMIENTOS
+        var villeta = context.Sedes
+			.First(s => s.Nombre == "Villeta");
 
-		//MEDELLIN
-		var habitacionMedellin = context.Alojamientos
+        var elPlacer = context.Sedes
+            .First(s => s.Nombre == "El placer");
+
+        var manguruma = context.Sedes
+            .First(s => s.Nombre == "Manguruma");
+
+        var tablones = context.Sedes
+            .First(s => s.Nombre == "Tablones");
+
+        var gonzaloMorante = context.Sedes
+            .First(s => s.Nombre == "Gonzalo Morante");
+
+        //ALOJAMIENTOS
+
+        //MEDELLIN
+        var habitacionMedellin = context.Alojamientos
 			.First(a =>
 				a.Nombre == "Habitacion 1" &&
 				a.SedeId == medellin.Id);
@@ -637,6 +653,38 @@ public static class SeedData
             .First(a =>
                 a.Nombre == "Apartamento 401" &&
                 a.SedeId == santaMarta.Id);
+
+        // ALOJAMIENTOS SEDES RECREATIVAS
+
+        var villetaAlojamiento = context.Alojamientos
+			.First(a =>
+				a.Nombre == "Alojamiento 1" &&
+				a.SedeId == villeta.Id);
+
+        var elPlacer1Habitacion = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Alojamiento 3" &&
+                a.SedeId == elPlacer.Id);
+
+        var elPlacer2Habitaciones = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Alojamiento 1" &&
+                a.SedeId == elPlacer.Id);
+
+        var mangurumaEspecial = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Bloque Nuevo 1" &&
+                a.SedeId == manguruma.Id);
+
+        var tablones2Habitaciones = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Alojamiento 3" &&
+                a.SedeId == tablones.Id);
+
+        var gonzalo1Habitacion = context.Alojamientos
+            .First(a =>
+                a.Nombre == "Alojamiento 4 Tipo A" &&
+                a.SedeId == gonzaloMorante.Id);
 
 
         var tarifas = new List<Tarifa>
@@ -859,9 +907,124 @@ public static class SeedData
 				TemporadaId = alta.Id,
 		
 				AlojamientoId = apartamento202.Id
+			},
+
+			// TARIFAS SEDES RECREATIVAS
+			// 1 HABITACION
+
+			new Tarifa
+			{
+				Nombre = "Villeta 1 Habitacion",
+
+				Monto = 70000,
+
+				CapacidadBase = 4,
+
+				ValorPersonaAdicional = 16000,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = villetaAlojamiento.Id
+			},
+
+			new Tarifa
+			{
+				Nombre = "El Placer 1 Habitacion",
+
+				Monto = 70000,
+
+				CapacidadBase = 4,
+
+				ValorPersonaAdicional = 16000,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = elPlacer1Habitacion.Id
+			},
+
+			new Tarifa
+			{
+				Nombre = "Gonzalo Morante 1 Habitacion",
+
+				Monto = 70000,
+
+				CapacidadBase = 4,
+
+				ValorPersonaAdicional = 16000,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = gonzalo1Habitacion.Id
+			},
+
+			// 2 HABITACIONES
+
+			new Tarifa
+			{
+				Nombre = "El Placer 2 Habitaciones",
+
+				Monto = 90000,
+
+				CapacidadBase = 4,
+
+				ValorPersonaAdicional = 16000,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = elPlacer2Habitaciones.Id
+			},
+
+			new Tarifa
+			{
+				Nombre = "Tablones 2 Habitaciones",
+
+				Monto = 90000,
+
+				CapacidadBase = 4,
+
+				ValorPersonaAdicional = 16000,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = tablones2Habitaciones.Id
+			},
+
+			// TARIFAS ESPECIALES
+
+			new Tarifa
+			{
+				Nombre = "Manguruma Especial",
+
+				Monto = 37000,
+
+				CapacidadBase = 4,
+
+				ValorPersonaAdicional = 11000,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = mangurumaEspecial.Id
+			},
+
+			new Tarifa
+			{
+				Nombre = "El Placer Especial",
+
+				Monto = 27000,
+
+				CapacidadBase = 4,
+
+				ValorPersonaAdicional = 11000,
+
+				TemporadaId = baja.Id,
+
+				AlojamientoId = mangurumaEspecial.Id
 			}
 
+		};
 
-        };
+        context.Tarifas.AddRange(tarifas);
+		await context.SaveChangesAsync();
+
     }
 }

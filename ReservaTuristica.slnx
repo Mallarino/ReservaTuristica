@@ -2,6 +2,9 @@
   <Folder Name="/Elementos de la solución/">
     <File Path=".gitignore" />
   </Folder>
+  <Folder Name="/Scripts/">
+    <File Path="sp_HabitacionesDisponibles.sql" />
+  </Folder>
   <Project Path="ReservaTuristica.Application/ReservaTuristica.Application.csproj" />
   <Project Path="ReservaTuristica.Domain/ReservaTuristica.Domain.csproj" />
   <Project Path="ReservaTuristica.Infrastructure/ReservaTuristica.Infrastructure.csproj" />
