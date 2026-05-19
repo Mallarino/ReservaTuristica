@@ -8,7 +8,7 @@ namespace ReservaTuristica.Domain.Enums
     {
         Baja = 1,
         Alta = 2,
-        Especial = 3
+        //Especial = 3
 
     }
 
