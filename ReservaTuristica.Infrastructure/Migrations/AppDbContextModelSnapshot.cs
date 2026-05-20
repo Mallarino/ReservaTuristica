@@ -252,7 +252,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasIndex("SedeId");
 
-                    b.ToTable("Alojamientos");
+                    b.ToTable("Alojamientos", (string)null);
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Reserva", b =>
@@ -295,7 +295,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasIndex("TarifaId");
 
-                    b.ToTable("Reservas");
+                    b.ToTable("Reservas", (string)null);
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Sede", b =>
@@ -326,7 +326,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sedes");
+                    b.ToTable("Sedes", (string)null);
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Tarifa", b =>
@@ -364,7 +364,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasIndex("TemporadaId");
 
-                    b.ToTable("Tarifas");
+                    b.ToTable("Tarifas", (string)null);
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Temporada", b =>
@@ -390,7 +390,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Temporadas");
+                    b.ToTable("Temporadas", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

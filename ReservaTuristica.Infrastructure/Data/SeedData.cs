@@ -671,7 +671,7 @@ public static class SeedData
                 a.Nombre == "Alojamiento 1" &&
                 a.SedeId == elPlacer.Id);
 
-        var mangurumaEspecial = context.Alojamientos
+        var mangurumaAlojamiento = context.Alojamientos
             .First(a =>
                 a.Nombre == "Bloque Nuevo 1" &&
                 a.SedeId == manguruma.Id);
@@ -957,6 +957,21 @@ public static class SeedData
 				AlojamientoId = gonzalo1Habitacion.Id
 			},
 
+            new Tarifa
+            {
+                Nombre = "Manguruma 1 Habitacion",
+
+                Monto = 70000,
+
+                CapacidadBase = 4,
+
+                ValorPersonaAdicional = 16000,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = mangurumaAlojamiento.Id
+            },
+
 			// 2 HABITACIONES
 
 			new Tarifa
@@ -989,37 +1004,6 @@ public static class SeedData
 				AlojamientoId = tablones2Habitaciones.Id
 			},
 
-			// TARIFAS ESPECIALES
-
-			new Tarifa
-			{
-				Nombre = "Manguruma Especial",
-
-				Monto = 37000,
-
-				CapacidadBase = 4,
-
-				ValorPersonaAdicional = 11000,
-
-				TemporadaId = baja.Id,
-
-				AlojamientoId = mangurumaEspecial.Id
-			},
-
-			new Tarifa
-			{
-				Nombre = "El Placer Especial",
-
-				Monto = 27000,
-
-				CapacidadBase = 4,
-
-				ValorPersonaAdicional = 11000,
-
-				TemporadaId = baja.Id,
-
-				AlojamientoId = mangurumaEspecial.Id
-			}
 
 		};
 

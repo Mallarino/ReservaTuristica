@@ -4,6 +4,7 @@
   </Folder>
   <Folder Name="/Scripts/">
     <File Path="sp_HabitacionesDisponibles.sql" />
+    <File Path="sp_HabitacionesDisponiblesPorPersonas.sql" />
   </Folder>
   <Project Path="ReservaTuristica.Application/ReservaTuristica.Application.csproj" />
   <Project Path="ReservaTuristica.Domain/ReservaTuristica.Domain.csproj" />
