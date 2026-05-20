@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using ReservaTuristica.Application.Interfaces;
 using ReservaTuristica.Infrastructure.Data;
+using ReservaTuristica.Infrastructure.Servicies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<
+    IDisponibilidadService,
+    DisponibilidadService>();
 
 var app = builder.Build();
 

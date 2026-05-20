@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE sp_CalcularTarifa
 (
-    @TarifaId INT,
+    @SedeId INT,
+    @TemporadaId INT,
     @NumeroPersonas INT,
     @NumeroHabitaciones INT
 )
@@ -11,37 +12,81 @@ BEGIN
     DECLARE @CapacidadBase INT
     DECLARE @ValorPersonaAdicional DECIMAL(18,2)
 
-    DECLARE @PersonasAdicionales INT
+    DECLARE @PersonasAdicionales INT = 0
     DECLARE @Total DECIMAL(18,2)
 
-    -- Obtener tarifa
-    SELECT
-        @MontoBase = Monto,
-        @CapacidadBase = CapacidadBase,
-        @ValorPersonaAdicional = ValorPersonaAdicional
-    FROM Tarifas
-    WHERE Id = @TarifaId
+    -- Obtener tarifa correcta
+    SELECT TOP 1
+        @MontoBase = t.Monto,
+        @CapacidadBase = t.CapacidadBase,
+        @ValorPersonaAdicional = t.ValorPersonaAdicional
+    FROM Tarifas t
 
-    -- Calcular personas adicionales
-    IF @NumeroPersonas > @CapacidadBase
+    INNER JOIN Alojamientos a
+        ON t.AlojamientoId = a.Id
+
+    INNER JOIN Sedes s
+        ON a.SedeId = s.Id
+
+    WHERE
+        s.Id = @SedeId
+        AND t.TemporadaId = @TemporadaId
+        AND a.CantidadHabitaciones = @NumeroHabitaciones
+        AND 
+        (
+
+        (s.Tipo = 1 AND a.Capacidad >= @NumeroPersonas) 
+        OR 
+        s.Tipo = 2 
+
+        )
+        AND
+        (
+            -- Tarifas fijas (Medellín / Santa Marta)
+            (
+                t.ValorPersonaAdicional = 0
+                AND t.CapacidadBase >= @NumeroPersonas
+            )
+
+            OR
+
+            -- Tarifas con adicionales (Sedes recreativas)
+            (
+                t.ValorPersonaAdicional > 0
+             
+            )
+        )
+
+
+    -- Validar si encontró tarifa
+    IF @MontoBase IS NULL
     BEGIN
-        SET @PersonasAdicionales =
-            @NumeroPersonas - @CapacidadBase
+        RAISERROR(
+            'No existe una tarifa para esa configuración',
+            16,
+            1
+        )
+
+        RETURN
     END
-    ELSE
+
+    -- Solo calcular adicionales si aplica
+    IF @ValorPersonaAdicional > 0
     BEGIN
-        SET @PersonasAdicionales = 0
+
+        IF @NumeroPersonas > @CapacidadBase
+        BEGIN
+            SET @PersonasAdicionales =
+                @NumeroPersonas - @CapacidadBase
+        END
+
     END
 
     -- Calcular total
     SET @Total =
-        (
-            @MontoBase
-            +
-            (@PersonasAdicionales * @ValorPersonaAdicional)
-        )
-        *
-        @NumeroHabitaciones
+        @MontoBase
+        +
+        (@PersonasAdicionales * @ValorPersonaAdicional)
 
     -- Resultado
     SELECT
@@ -49,7 +94,6 @@ BEGIN
         @CapacidadBase AS CapacidadBase,
         @PersonasAdicionales AS PersonasAdicionales,
         @ValorPersonaAdicional AS ValorPersonaAdicional,
-        @NumeroHabitaciones AS NumeroHabitaciones,
         @Total AS Total
 
 END

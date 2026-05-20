@@ -3,6 +3,8 @@
     <File Path=".gitignore" />
   </Folder>
   <Folder Name="/Scripts/">
+    <File Path="sp_CalcularTarifa.sql" />
+    <File Path="sp_ConsultarTarifas.sql" />
     <File Path="sp_HabitacionesDisponibles.sql" />
     <File Path="sp_HabitacionesDisponiblesPorPersonas.sql" />
   </Folder>
