@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ReservaTuristica.Domain\ReservaTuristica.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Servicies\" />
+  </ItemGroup>
+
 </Project>

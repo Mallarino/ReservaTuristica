@@ -1,0 +1,48 @@
+﻿@model ReservaTuristica.Application.DTOs.CalculoTarifaDto
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+
+}
+
+@if (Model != null){
+
+    <h1>Cálculo de Tarifa</h1>
+
+    <table class="table">
+
+        <tr>
+            <th>Monto Base</th>
+            <td>@Model.MontoBase</td>
+        </tr>
+
+        <tr>
+            <th>Capacidad Base</th>
+            <td>@Model.CapacidadBase</td>
+        </tr>
+
+        <tr>
+            <th>Personas Adicionales</th>
+            <td>@Model.PersonasAdicionales</td>
+        </tr>
+
+        <tr>
+            <th>Valor Persona Adicional</th>
+            <td>@Model.ValorPersonaAdicional</td>
+        </tr>
+
+        <tr>
+            <th>Total</th>
+            <td>
+                <strong>
+                    @Model.Total
+                </strong>
+            </td>
+        </tr>
+
+    </table>
+
+}

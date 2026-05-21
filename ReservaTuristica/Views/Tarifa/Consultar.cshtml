@@ -1,0 +1,34 @@
+﻿@model List<ReservaTuristica.Application.DTOs.ConsultarTarifaDto>
+
+<h1>Tarifas</h1>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Sede</th>
+            <th>Alojamiento</th>
+            <th>Temporada</th>
+            <th>Monto</th>
+            <th>Capacidad Base</th>
+            <th>Valor Adicional</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var tarifa in Model)
+        {
+            <tr>
+                <td>@tarifa.Sede</td>
+                <td>@tarifa.Alojamiento</td>
+                <td>@tarifa.Temporada</td>
+                <td>@tarifa.Monto</td>
+                <td>@tarifa.CapacidadBase</td>
+                <td>@tarifa.ValorPersonaAdicional</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

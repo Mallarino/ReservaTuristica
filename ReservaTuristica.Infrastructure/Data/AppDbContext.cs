@@ -20,6 +20,14 @@ public class AppDbContext : IdentityDbContext
             .Entity<AlojamientoDisponibleDto>()
             .HasNoKey();
 
+        modelBuilder
+            .Entity<CalculoTarifaDto>()
+            .HasNoKey();
+
+        modelBuilder
+            .Entity<ConsultarTarifaDto>()
+            .HasNoKey();
+
         modelBuilder.Entity<Reserva>()
             .HasOne(r => r.Tarifa)
             .WithMany()
@@ -44,6 +52,10 @@ public class AppDbContext : IdentityDbContext
     public DbSet<Alojamiento> Alojamientos { get; set; }
 
     public DbSet<AlojamientoDisponibleDto> AlojamientosDisponibles { get; set; }
+
+    public DbSet<CalculoTarifaDto> CalculoTarifa { get; set; }
+
+    public DbSet<ConsultarTarifaDto> ConsultarTarifa { get; set; }
 
     public DbSet<Reserva> Reservas { get; set; }
 

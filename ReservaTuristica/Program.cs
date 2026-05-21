@@ -16,6 +16,10 @@ builder.Services.AddScoped<
     IDisponibilidadService,
     DisponibilidadService>();
 
+builder.Services.AddScoped<
+    ITarifaService,
+    TarifaService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

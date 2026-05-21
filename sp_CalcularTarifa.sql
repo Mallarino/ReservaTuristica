@@ -34,15 +34,17 @@ BEGIN
         AND a.CantidadHabitaciones = @NumeroHabitaciones
         AND 
         (
-
-        (s.Tipo = 1 AND a.Capacidad >= @NumeroPersonas) 
+        -- es apartamento Y tiene capacidad suficiente
+        (s.Tipo = 1 AND a.Capacidad >= @NumeroPersonas)
+        
         OR 
+
         s.Tipo = 2 
 
         )
         AND
         (
-            -- Tarifas fijas (Medellín / Santa Marta)
+            -- tarifa fija Y capacidad suficiente
             (
                 t.ValorPersonaAdicional = 0
                 AND t.CapacidadBase >= @NumeroPersonas
@@ -50,7 +52,7 @@ BEGIN
 
             OR
 
-            -- Tarifas con adicionales (Sedes recreativas)
+            -- Tarifa con adicinales
             (
                 t.ValorPersonaAdicional > 0
              
