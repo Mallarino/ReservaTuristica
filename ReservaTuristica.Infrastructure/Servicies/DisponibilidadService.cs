@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ReservaTuristica.Application.DTOs;
 using ReservaTuristica.Application.Interfaces;
 using ReservaTuristica.Domain.Entities;
+using ReservaTuristica.Domain.Enums;
 using ReservaTuristica.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,13 @@ namespace ReservaTuristica.Infrastructure.Servicies
                     personasParam)
                 .ToListAsync();
 
+
+            if (fechaInicio >= fechaFin)
+            {
+                throw new Exception(
+                    "La fecha final debe ser mayor a la inicial");
+            }
+
             var temporada = await _context.Temporadas
                 .FirstOrDefaultAsync(t =>
 
@@ -107,7 +115,7 @@ namespace ReservaTuristica.Infrastructure.Servicies
                                 numeroPersonas,
                                 alojamientoEntity.CantidadHabitaciones
                                 );
-                    
+
 
                     if (tarifa != null)
                     {
@@ -117,7 +125,44 @@ namespace ReservaTuristica.Infrastructure.Servicies
                 }
                 catch
                 {
-                    alojamiento.Precio = 0;
+                    try
+                    {
+
+                        var alojamientoEntity =
+                        await _context.Alojamientos
+                            .FirstOrDefaultAsync(a =>
+                                a.Id ==
+                                alojamiento.Id);
+
+                        if (alojamientoEntity == null)
+                            continue;
+                        // fallback temporada baja
+
+                        var temporadaBaja =
+                            await _context.Temporadas
+                                .FirstOrDefaultAsync(t =>
+                                    t.Tipo ==
+                                    TipoTemporada.Baja);
+
+                        var tarifaBaja =
+                            await _tarifaService
+                                .CalcularTarifaAsync(
+                                    alojamientoEntity.SedeId,
+                                    temporadaBaja.Id,
+                                    numeroPersonas,
+                                    alojamientoEntity.CantidadHabitaciones
+                                );
+
+                        if (tarifaBaja != null)
+                        {
+                            alojamiento.Precio =
+                                tarifaBaja.Total;
+                        }
+                    }
+                    catch
+                    {
+                        alojamiento.Precio = 0;
+                    }
                 }
             }
 

@@ -23,20 +23,32 @@ namespace ReservaTuristica.Web.Controllers
             )
         {
 
-            if (!fechaInicio.HasValue || !fechaFin.HasValue)
+            try
             {
-                return View(new List<AlojamientoDisponibleDto>());
+                if (!fechaInicio.HasValue || !fechaFin.HasValue)
+                {
+                    return View(new List<AlojamientoDisponibleDto>());
+                }
+
+                var disponibles =
+                    await _service.ObtenerDisponiblesPorPersonasAsync(
+                        fechaInicio.Value,
+                        fechaFin.Value,
+                        numeroPersonas,
+                        numeroHabitaciones,
+                        temporadaId);
+
+                return View(disponibles);
+            } 
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+
+                return View(
+                    new List<AlojamientoDisponibleDto>());
             }
 
-            var disponibles =
-                await _service.ObtenerDisponiblesPorPersonasAsync(
-                    fechaInicio.Value,
-                    fechaFin.Value,
-                    numeroPersonas,
-                    numeroHabitaciones,
-                    temporadaId);
-
-            return View(disponibles);
+            
         }
     }
 }

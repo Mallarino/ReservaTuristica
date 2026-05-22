@@ -683,6 +683,11 @@ public static class SeedData
 
         var gonzalo1Habitacion = context.Alojamientos
             .First(a =>
+                a.Nombre == "Alojamiento 5 Tipo B" &&
+                a.SedeId == gonzaloMorante.Id);
+
+        var gonzalo2Habitacion = context.Alojamientos
+            .First(a =>
                 a.Nombre == "Alojamiento 4 Tipo A" &&
                 a.SedeId == gonzaloMorante.Id);
 
@@ -989,7 +994,22 @@ public static class SeedData
 				AlojamientoId = elPlacer2Habitaciones.Id
 			},
 
-			new Tarifa
+            new Tarifa
+            {
+                Nombre = "Gonzalo Morante 2 Habitaciones",
+
+                Monto = 90000,
+
+                CapacidadBase = 4,
+
+                ValorPersonaAdicional = 16000,
+
+                TemporadaId = baja.Id,
+
+                AlojamientoId = gonzalo2Habitacion.Id
+            },
+
+            new Tarifa
 			{
 				Nombre = "Tablones 2 Habitaciones",
 

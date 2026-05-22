@@ -19,7 +19,8 @@
 
             <input type="date"
                    name="fechaInicio"
-                   class="form-control" />
+                   class="form-control"
+                   value="@Context.Request.Query["fechaInicio"]"/>
 
         </div>
 
@@ -29,7 +30,8 @@
 
             <input type="date"
                    name="fechaFin"
-                   class="form-control" />
+                   class="form-control" 
+                   value="@Context.Request.Query["fechaFin"]" />
 
         </div>
 
@@ -39,7 +41,8 @@
 
             <input type="number"
                    name="numeroPersonas"
-                   class="form-control" />
+                   class="form-control"
+                   value="@Context.Request.Query["numeroPersonas"]" />
 
         </div>
 
@@ -102,6 +105,10 @@
                         <a asp-controller="Reserva"
                            asp-action="Crear"
                            asp-route-alojamientoId="@item.Id"
+                           asp-route-numeroHabitaciones="@item.CantidadHabitaciones"
+                           asp-route-fechaInicio="@Context.Request.Query["fechaInicio"]"
+                           asp-route-fechaFin="@Context.Request.Query["fechaFin"]"
+                           asp-route-numeroPersonas="@Context.Request.Query["numeroPersonas"]"
                            class="btn btn-success">
 
                             Reservar

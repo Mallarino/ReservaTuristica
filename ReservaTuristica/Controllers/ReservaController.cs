@@ -20,10 +20,23 @@ namespace ReservaTuristica.Web.Controllers
         }
         // GET
         [HttpGet]
-        public IActionResult Crear()
+        public IActionResult Crear(int alojamientoId,
+            DateTime fechaInicio,
+            DateTime fechaFin,
+            int numeroPersonas, 
+            int numeroHabitaciones)
         {
-            ViewBag.Alojamientos = _context.Alojamientos.ToList();
-            return View();  
+            var dto = new ReservaDto
+            {
+                AlojamientoId = alojamientoId,
+                FechaInicio = fechaInicio,
+                FechaFin = fechaFin,
+                NumeroPersonas = numeroPersonas,
+                NumeroHabitaciones = numeroHabitaciones
+
+            };
+
+            return View(dto);
         }
 
         // POST
