@@ -5,6 +5,7 @@ using ReservaTuristica.Application.Interfaces;
 using ReservaTuristica.Infrastructure.Data;
 using ReservaTuristica.Infrastructure.Servicies;
 using ReservaTuristica.Web.Data;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,9 @@ builder.Services
 builder.Services.AddScoped<
     IDisponibilidadService,
     DisponibilidadService>();
+
+builder.Services.AddTransient<
+    IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<
     ITarifaService,
