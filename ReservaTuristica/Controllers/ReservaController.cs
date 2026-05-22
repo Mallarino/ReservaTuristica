@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReservaTuristica.Application.DTOs;
 using ReservaTuristica.Application.Interfaces;
+using ReservaTuristica.Domain.Entities;
 using ReservaTuristica.Infrastructure.Data;
+using System.Security.Claims;
 
 namespace ReservaTuristica.Web.Controllers
 {
+    [Authorize]
     public class ReservaController: Controller
     {
         private readonly IReservaService _service;
@@ -32,7 +36,7 @@ namespace ReservaTuristica.Web.Controllers
                 FechaInicio = fechaInicio,
                 FechaFin = fechaFin,
                 NumeroPersonas = numeroPersonas,
-                NumeroHabitaciones = numeroHabitaciones
+                NumeroHabitaciones = numeroHabitaciones,
 
             };
 
@@ -46,7 +50,14 @@ namespace ReservaTuristica.Web.Controllers
         {
             try
             {
+                var userId =
+                    User.FindFirstValue(
+                        ClaimTypes.NameIdentifier);
+
+                dto.UserId = userId;
+
                 await _service.CrearReservaAsync(dto);
+
 
                 ViewBag.Mensaje =
                     "Reserva creada correctamente";
@@ -62,6 +73,22 @@ namespace ReservaTuristica.Web.Controllers
 
                 return View(dto);
             }
+        }
+
+        //VER MIS RESERVAS
+        public async Task<IActionResult>
+            MisReservas()
+        {
+            var userId =
+                User.FindFirstValue(
+                    ClaimTypes.NameIdentifier);
+
+            var reservas =
+                await _service
+                    .ObtenerReservasUsuarioAsync(
+                        userId);
+
+            return View(reservas);
         }
 
         // ELIMINAR

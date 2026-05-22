@@ -167,10 +167,12 @@ namespace ReservaTuristica.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -207,10 +209,12 @@ namespace ReservaTuristica.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -218,6 +222,105 @@ namespace ReservaTuristica.Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("ReservaTuristica.Application.DTOs.AlojamientoDisponibleDto", b =>
+                {
+                    b.Property<int>("CantidadHabitaciones")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Capacidad")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Precio")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Sede")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("AlojamientosDisponibles");
+                });
+
+            modelBuilder.Entity("ReservaTuristica.Application.DTOs.CalculoTarifaDto", b =>
+                {
+                    b.Property<int>("CapacidadBase")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MontoBase")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("PersonasAdicionales")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorPersonaAdicional")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("CalculoTarifa");
+                });
+
+            modelBuilder.Entity("ReservaTuristica.Application.DTOs.ConsultarTarifaDto", b =>
+                {
+                    b.Property<string>("Alojamiento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CapacidadBase")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Monto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Sede")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Temporada")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("ValorPersonaAdicional")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("ConsultarTarifa");
+                });
+
+            modelBuilder.Entity("ReservaTuristica.Application.DTOs.ReservaDto", b =>
+                {
+                    b.Property<int>("AlojamientoId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NombreTitular")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumeroHabitaciones")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumeroPersonas")
+                        .HasColumnType("int");
+
+                    b.ToTable("Reserva");
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Alojamiento", b =>
@@ -252,7 +355,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasIndex("SedeId");
 
-                    b.ToTable("Alojamientos", (string)null);
+                    b.ToTable("Alojamientos");
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Reserva", b =>
@@ -289,13 +392,19 @@ namespace ReservaTuristica.Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AlojamientoId");
 
                     b.HasIndex("TarifaId");
 
-                    b.ToTable("Reservas", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reservas");
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Sede", b =>
@@ -326,7 +435,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sedes", (string)null);
+                    b.ToTable("Sedes");
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Tarifa", b =>
@@ -364,7 +473,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasIndex("TemporadaId");
 
-                    b.ToTable("Tarifas", (string)null);
+                    b.ToTable("Tarifas");
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Temporada", b =>
@@ -390,7 +499,7 @@ namespace ReservaTuristica.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Temporadas", (string)null);
+                    b.ToTable("Temporadas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -469,9 +578,17 @@ namespace ReservaTuristica.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Alojamiento");
 
                     b.Navigation("Tarifa");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ReservaTuristica.Domain.Entities.Tarifa", b =>

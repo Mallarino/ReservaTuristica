@@ -18,6 +18,8 @@ namespace ReservaTuristica.Application.DTOs
 
         public int AlojamientoId { get; set; }
 
+        public string UserId { get; set; }
+
     }
 
 }

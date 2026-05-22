@@ -129,13 +129,25 @@ namespace ReservaTuristica.Infrastructure.Servicies
 
                 AlojamientoId = dto.AlojamientoId,
 
-                TarifaId = tarifa.Id
+                TarifaId = tarifa.Id,
+
+                UserId = dto.UserId
             };
 
             // GUARDAR
             _context.Reservas.Add(reserva);
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Reserva>>
+            ObtenerReservasUsuarioAsync(
+                string userId)
+        {   
+            return await _context.Reservas
+                .Include(r => r.Alojamiento)
+                .Where(r => r.UserId == userId)
+                .ToListAsync();
         }
 
         public async Task EliminarReservaAsync(int id)

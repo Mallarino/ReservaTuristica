@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,5 +28,9 @@ namespace ReservaTuristica.Domain.Entities
         public int TarifaId { get; set; }
 
         public Tarifa Tarifa { get; set; } = null!;
+
+        public string UserId { get; set; }
+
+        public IdentityUser User { get; set; }
     }
 }
