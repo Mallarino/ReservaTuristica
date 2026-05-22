@@ -13,7 +13,8 @@ BEGIN
         a.Descripcion,
         a.Capacidad,
         a.CantidadHabitaciones,
-        s.Nombre AS Sede
+        s.Nombre AS Sede,
+        CONVERT(DECIMAL(18,2), 0) AS Precio
     FROM Alojamientos a
     INNER JOIN Sedes s
         ON a.SedeId = s.Id

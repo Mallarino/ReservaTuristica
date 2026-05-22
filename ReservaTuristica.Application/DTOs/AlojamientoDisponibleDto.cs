@@ -16,6 +16,8 @@ namespace ReservaTuristica.Application.DTOs
 
         public int CantidadHabitaciones { get; set; }
 
+        public decimal Precio { get; set; }
+
         public string Sede { get; set; } = string.Empty;
     }
 

@@ -1,0 +1,73 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ReservaTuristica.Application.DTOs;
+using ReservaTuristica.Application.Interfaces;
+using ReservaTuristica.Infrastructure.Data;
+
+namespace ReservaTuristica.Web.Controllers
+{
+    public class ReservaController: Controller
+    {
+        private readonly IReservaService _service;
+
+        private readonly AppDbContext _context;
+
+        public ReservaController(
+        IReservaService service, AppDbContext context)
+        {
+            _service = service;
+            _context = context;
+        }
+        // GET
+        [HttpGet]
+        public IActionResult Crear()
+        {
+            ViewBag.Alojamientos = _context.Alojamientos.ToList();
+            return View();  
+        }
+
+        // POST
+        [HttpPost]
+        public async Task<IActionResult> Crear(
+            ReservaDto dto)
+        {
+            try
+            {
+                await _service.CrearReservaAsync(dto);
+
+                ViewBag.Mensaje =
+                    "Reserva creada correctamente";
+
+                return View(new ReservaDto());
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+
+                ViewBag.Alojamientos =
+                    _context.Alojamientos.ToList();
+
+                return View(dto);
+            }
+        }
+
+        // ELIMINAR
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            try
+            {
+                await _service.EliminarReservaAsync(id);
+
+                return RedirectToAction(
+                    "Index",
+                    "Home");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+
+                return View();
+            }
+        }
+    }
+}

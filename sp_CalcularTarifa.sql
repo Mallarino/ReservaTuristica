@@ -64,7 +64,7 @@ BEGIN
     IF @MontoBase IS NULL
     BEGIN
         RAISERROR(
-            'No existe una tarifa para esa configuración',
+            'No encontramos alojamiento para tus necesidades',
             16,
             1
         )

@@ -28,6 +28,10 @@ public class AppDbContext : IdentityDbContext
             .Entity<ConsultarTarifaDto>()
             .HasNoKey();
 
+        modelBuilder
+            .Entity<ReservaDto>()
+            .HasNoKey();
+
         modelBuilder.Entity<Reserva>()
             .HasOne(r => r.Tarifa)
             .WithMany()
@@ -58,6 +62,8 @@ public class AppDbContext : IdentityDbContext
     public DbSet<ConsultarTarifaDto> ConsultarTarifa { get; set; }
 
     public DbSet<Reserva> Reservas { get; set; }
+
+    public DbSet<ReservaDto> Reserva { get; set; }
 
     public DbSet<Tarifa> Tarifas { get; set; }
 

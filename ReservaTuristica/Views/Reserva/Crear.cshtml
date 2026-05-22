@@ -1,0 +1,100 @@
+﻿@model ReservaTuristica.Application.DTOs.ReservaDto
+
+<h1>Crear Reserva</h1>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success">
+        @ViewBag.Mensaje
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<form asp-action="Crear" method="post">
+
+    <div class="mb-3">
+
+        <label>Fecha Inicio</label>
+
+        <input asp-for="FechaInicio"
+               class="form-control"
+               type="date" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Fecha Fin</label>
+
+        <input asp-for="FechaFin"
+               class="form-control"
+               type="date" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Nombre Titular</label>
+
+        <input asp-for="NombreTitular"
+               class="form-control" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Número Personas</label>
+
+        <input asp-for="NumeroPersonas"
+               class="form-control"
+               type="number" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Número Habitaciones</label>
+
+        <input asp-for="NumeroHabitaciones"
+               class="form-control"
+               type="number" />
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Alojamiento</label>
+
+        <select asp-for="AlojamientoId"
+                class="form-control">
+
+            <option value="">
+                Seleccione un alojamiento
+            </option>
+
+            @foreach (var alojamiento in ViewBag.Alojamientos)
+            {
+                <option value="@alojamiento.Id">
+
+                    @alojamiento.Nombre
+
+                </option>
+            }
+
+        </select>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+
+        Reservar
+
+    </button>
+
+</form>

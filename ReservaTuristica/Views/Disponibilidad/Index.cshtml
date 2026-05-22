@@ -1,50 +1,119 @@
 ﻿@model List<ReservaTuristica.Application.DTOs.AlojamientoDisponibleDto>
 
-<h1>Alojamientos Disponibles</h1>
+<h1>Disponibilidad</h1>
 
-<div>
-    <form method="get">
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
 
-        <div>
+<form method="get">
+
+    <div class="row">
+
+        <div class="col-md-3">
+
             <label>Fecha Inicio</label>
-            <input type="date" name="fechaInicio" />
+
+            <input type="date"
+                   name="fechaInicio"
+                   class="form-control" />
+
         </div>
 
-        <div>
+        <div class="col-md-3">
+
             <label>Fecha Fin</label>
-            <input type="date" name="fechaFin" />
+
+            <input type="date"
+                   name="fechaFin"
+                   class="form-control" />
+
         </div>
 
-        <button type="submit">
-            Buscar Disponibilidad
-        </button>
+        <div class="col-md-3">
 
-    </form>
+            <label>Número Personas</label>
 
-    <hr />
-</div>
+            <input type="number"
+                   name="numeroPersonas"
+                   class="form-control" />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Sede</th>
-            <th>Capacidad</th>
-            <th>Habitaciones</th>
-            <th>Descripción</th>
-        </tr>
-    </thead>
+        </div>
 
-    <tbody>
-        @foreach (var item in Model)
-        {
+        <div class="col-md-3 d-flex align-items-end">
+
+            <button type="submit"
+                    class="btn btn-primary w-100">
+
+                Buscar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<hr />
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+
+        <thead>
+
             <tr>
-                <td>@item.Nombre</td>
-                <td>@item.Sede</td>
-                <td>@item.Capacidad</td>
-                <td>@item.CantidadHabitaciones</td>
-                <td>@item.Descripcion</td>
+                <th>Alojamiento</th>
+                <th>Sede</th>
+                <th>Capacidad</th>
+                <th>Habitaciones</th>
+                <th>Precio</th>
+                <th>Acción</th>
             </tr>
-        }
-    </tbody>
-</table>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.Nombre</td>
+
+                    <td>@item.Sede</td>
+
+                    <td>@item.Capacidad</td>
+
+                    <td>@item.CantidadHabitaciones</td>
+
+                    <td>
+                        <strong>
+                            $ @item.Precio
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        <a asp-controller="Reserva"
+                           asp-action="Crear"
+                           asp-route-alojamientoId="@item.Id"
+                           class="btn btn-success">
+
+                            Reservar
+
+                        </a>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+}

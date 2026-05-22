@@ -31,15 +31,15 @@ public static class SeedData
 			{
 				Nombre = "Baja",
 				Tipo = TipoTemporada.Baja,
-				FechaInicio = new DateTime(2026, 1, 15),
-				FechaFin = new DateTime(2026, 6, 15)
+				FechaInicio = new DateTime(2026, 2, 1),
+				FechaFin = new DateTime(2026, 11, 1)
 			},
 			new Temporada
 			{
 				Nombre = "Alta",
 				Tipo = TipoTemporada.Alta,
-				FechaInicio = new DateTime(2026, 6, 16),
-				FechaFin = new DateTime(2026, 8, 31)
+				FechaInicio = new DateTime(2026, 11, 2),
+				FechaFin = new DateTime(2027, 1, 31)
 			}
 		};
 

@@ -20,6 +20,10 @@ builder.Services.AddScoped<
     ITarifaService,
     TarifaService>();
 
+builder.Services.AddScoped<
+    IReservaService,
+    ReservaService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
